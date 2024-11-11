@@ -74,4 +74,27 @@ footer {
     nav ul li {
         margin: 5px 0;
     }
+    button {
+        background-color: #0044cc;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    button:hover {
+        background-color: #003399;
+    }
+
+    button:active {
+        background-color: #002266;
+    }
+
+    @media (max-width: 768px) {
+        button {
+            width: 100%;
+            padding: 15px 0;
+        }
+    }
 }
