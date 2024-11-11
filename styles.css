@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -25,15 +25,6 @@ nav a {
     text-transform: uppercase;
 }
 
-main {
-    padding: 20px;
-}
-
-
-main a[href="project1"]:hover {
-    background-color: #ccc;
-}
-
 footer {
     background-color: #333;
     color: #fff;
@@ -42,4 +33,26 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+h1, h2 {
+    text-align: center;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h3, h4, h5, h6, p, ul, li{
+    text-align: center;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #ccc8c8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    padding: 20px;
 }
