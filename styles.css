@@ -29,6 +29,11 @@ main {
     padding: 20px;
 }
 
+
+main a[href="project1"]:hover {
+    background-color: #ccc;
+}
+
 footer {
     background-color: #333;
     color: #fff;
