@@ -45,7 +45,10 @@ a {
     color: black;
     text-transform: none;
     text-decoration: none;
+    background-color: transparent;
 }
+
+
 
 h2 {
     text-align: center;
