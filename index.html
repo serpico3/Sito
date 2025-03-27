@@ -3,54 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum - Nome Cognome</title>
-    <!-- Bootstrap CSS -->
+    <title>Diego Serpelloni - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        /* Piccolo aggiustamento per lo spazio tra nome e bottoni */
-        .name-spacing {
-            margin-bottom: 4rem !important;
+        :root {
+            --primary-color: #7ec4cf;
+            --primary-dark: #5ca4b0;
+            --dark-color: #2f3e46;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .name-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+        
+        .nav-btn {
+            border: 2px solid var(--primary-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(126, 196, 207, 0.2);
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+        
+        .nav-btn:hover::before {
+            width: 100%;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .social-icon {
+            color: var(--dark-color);
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--primary-dark);
+            transform: translateY(-3px);
         }
     </style>
 </head>
-<body class="bg-light d-flex flex-column min-vh-100 justify-content-center">
-    <div class="container text-center">
-        <!-- Nome e cognome -->
-        <h1 class="display-3 mb-5 name-spacing fw-bold">Nome Cognome</h1>
-        
-        <!-- Container per i bottoni -->
-        <div class="row g-4 justify-content-center">
-            <!-- Bottone 1 -->
-            <div class="col-12 col-md-6 col-lg-5">
-                <a href="esperienze.html" class="btn btn-outline-dark w-100 py-4 fs-4 border-2 rounded-3">
-                    Esperienze
-                </a>
-            </div>
-            
-            <!-- Bottone 2 -->
-            <div class="col-12 col-md-6 col-lg-5">
-                <a href="formazione.html" class="btn btn-outline-dark w-100 py-4 fs-4 border-2 rounded-3">
-                    Formazione
-                </a>
-            </div>
-            
-            <!-- Bottone 3 -->
-            <div class="col-12 col-md-6 col-lg-5">
-                <a href="competenze.html" class="btn btn-outline-dark w-100 py-4 fs-4 border-2 rounded-3">
-                    Competenze
-                </a>
-            </div>
-            
-            <!-- Bottone 4 -->
-            <div class="col-12 col-md-6 col-lg-5">
-                <a href="contatti.html" class="btn btn-outline-dark w-100 py-4 fs-4 border-2 rounded-3">
-                    Contatti
-                </a>
+<body class="min-vh-100 d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <!-- Avatar/Illustrazione -->
+                <img src="https://ui-avatars.com/api/?name=Diego+Serpelloni&size=200&background=7ec4cf&color=fff&rounded=true" 
+                     alt="Diego Serpelloni" 
+                     class="rounded-circle mb-4 floating" 
+                     style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #7ec4cf;">
+                
+                <h1 class="name-title animate__animated animate__fadeIn">Diego Serpelloni</h1>
+                <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">Sys Admin && Cybersecurity Specialist</p>
+                
+                <div class="row g-3 justify-content-center animate__animated animate__fadeIn animate__delay-2s">
+                    <div class="col-md-5 col-12">
+                        <a href="esperienze.html" class="btn nav-btn w-100 py-3 fs-5 rounded-pill">
+                            🚀 Esperienze
+                        </a>
+                    </div>
+                    <div class="col-md-5 col-12">
+                        <a href="formazione.html" class="btn nav-btn w-100 py-3 fs-5 rounded-pill">
+                            🎓 Formazione
+                        </a>
+                    </div>
+                    <div class="col-md-5 col-12">
+                        <a href="competenze.html" class="btn nav-btn w-100 py-3 fs-5 rounded-pill">
+                            💻 Competenze
+                        </a>
+                    </div>
+                    <div class="col-md-5 col-12">
+                        <a href="contatti.html" class="btn nav-btn w-100 py-3 fs-5 rounded-pill">
+                            📩 Contatti
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="mt-5 animate__animated animate__fadeIn animate__delay-3s">
+                    <a href="#" class="mx-2 social-icon"><i class="bi bi-linkedin fs-4"></i></a>
+                    <a href="#" class="mx-2 social-icon"><i class="bi bi-github fs-4"></i></a>
+                    <a href="#" class="mx-2 social-icon"><i class="bi bi-twitter fs-4"></i></a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS (opzionale) -->
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
