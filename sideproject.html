@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Projects - Diego Serpelloni</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="page-header text-center animate__animated animate__fadeIn">
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-3">I Miei Side Projects</h1>
+            <p class="lead">Progetti personali dove metto in pratica creatività e innovazione</p>
+        </div>
+    </header>
+    
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <a href="index.html" class="btn back-btn rounded-pill px-4">
+                <i class="bi bi-arrow-left me-2"></i>Torna alla Home
+            </a>
+        </div>
+        
+        <div class="row g-4 animate__animated animate__fadeIn animate__delay-1s">
+            <!-- Progetto 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card project-card border-0 shadow-sm rounded-3 overflow-hidden" data-project="taskflow">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         class="project-img" 
+                         alt="TaskFlow App">
+                    <div class="card-body">
+                        <h3 class="fw-bold">Foto</h3>
+                        <p class="text-muted">Appassionato di foto, qui carico tutti i miei scatti</p>
+                        <p>Un archivio web publico delle foto da me scattate</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progetto 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card project-card border-0 shadow-sm rounded-3 overflow-hidden" data-project="ecotracker">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         class="project-img" 
+                         alt="EcoTracker">
+                    <div class="card-body">
+                        <h3 class="fw-bold">EcoTracker</h3>
+                        <p class="text-muted">Monitoraggio impronta ecologica</p>
+                        <p>Un'app per tracciare l'impatto ambientale delle proprie azioni...</p>
+                        <div class="mb-3">
+                            <span class="badge tech-badge rounded-pill me-2 mb-2">Vue.js</span>
+                            <span class="badge tech-badge rounded-pill me-2 mb-2">MongoDB</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Demo</a>
+                            <a href="#" class="btn btn-sm btn-outline-dark rounded-pill">Codice</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Progetto 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card project-card border-0 shadow-sm rounded-3 overflow-hidden" data-project="recipeai">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         class="project-img" 
+                         alt="RecipeAI">
+                    <div class="card-body">
+                        <h3 class="fw-bold">RecipeAI</h3>
+                        <p class="text-muted">Generatore di ricette con AI</p>
+                        <p>Genera ricette personalizzate in base agli ingredienti...</p>
+                        <div class="mb-3">
+                            <span class="badge tech-badge rounded-pill me-2 mb-2">Python</span>
+                            <span class="badge tech-badge rounded-pill me-2 mb-2">Flask</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Demo</a>
+                            <a href="#" class="btn btn-sm btn-outline-dark rounded-pill">Codice</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modali dei progetti -->
+    <!-- Modale TaskFlow -->
+    <div id="modal-taskflow" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>TaskFlow App</h2>
+                <p class="text-muted">Applicazione per la gestione delle attività</p>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                     class="img-fluid rounded mb-4" 
+                     alt="TaskFlow App">
+                <h4>Descrizione</h4>
+                <p>TaskFlow è un'applicazione web completa per la gestione delle attività personali e di team. Offre un'interfaccia intuitiva con funzionalità avanzate come:</p>
+                <ul>
+                    <li>Drag & drop per riorganizzare le attività</li>
+                    <li>Sistema di tag e categorie personalizzabili</li>
+                    <li>Collaborazione in tempo reale tra utenti</li>
+                    <li>Notifiche e promemoria</li>
+                    <li>Statistiche e report di produttività</li>
+                </ul>
+                <h4 class="mt-4">Tecnologie utilizzate</h4>
+                <div class="mb-4">
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">React</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Redux</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Firebase</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Node.js</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="Project1.html" class="btn btn-read-more">
+                    <i class="bi bi-book me-2"></i>Leggi di più
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale EcoTracker -->
+    <div id="modal-ecotracker" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>EcoTracker</h2>
+                <p class="text-muted">Monitoraggio impronta ecologica</p>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                     class="img-fluid rounded mb-4" 
+                     alt="EcoTracker">
+                <h4>Descrizione</h4>
+                <p>EcoTracker è un'applicazione mobile che aiuta gli utenti a monitorare e ridurre il loro impatto ambientale quotidiano. Le principali funzionalità includono:</p>
+                <ul>
+                    <li>Tracciamento delle emissioni di CO2</li>
+                    <li>Calcolo dell'impronta ecologica</li>
+                    <li>Suggerimenti personalizzati per ridurre l'impatto</li>
+                    <li>Community per condividere risultati e obiettivi</li>
+                    <li>Integrazione con dispositivi IoT smart home</li>
+                </ul>
+                <h4 class="mt-4">Tecnologie utilizzate</h4>
+                <div class="mb-4">
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Vue.js</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Express</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">MongoDB</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">PWA</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="project-ecotracker.html" class="btn btn-read-more">
+                    <i class="bi bi-book me-2"></i>Leggi di più
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale RecipeAI -->
+    <div id="modal-recipeai" class="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>RecipeAI</h2>
+                <p class="text-muted">Generatore di ricette con AI</p>
+            </div>
+            <div class="modal-body">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                     class="img-fluid rounded mb-4" 
+                     alt="RecipeAI">
+                <h4>Descrizione</h4>
+                <p>RecipeAI utilizza l'intelligenza artificiale per generare ricette personalizzate basate sugli ingredienti disponibili e sulle preferenze dietetiche. Caratteristiche principali:</p>
+                <ul>
+                    <li>Generazione di ricette in tempo reale</li>
+                    <li>Adattamento a restrizioni dietetiche (vegano, senza glutine, ecc.)</li>
+                    <li>Sistema di valutazione e feedback</li>
+                    <li>Lista della spesa automatica</li>
+                    <li>Integrazione con assistenti vocali</li>
+                </ul>
+                <h4 class="mt-4">Tecnologie utilizzate</h4>
+                <div class="mb-4">
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Python</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Flask</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">OpenAI API</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">PostgreSQL</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="project-recipeai.html" class="btn btn-read-more">
+                    <i class="bi bi-book me-2"></i>Leggi di più
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
