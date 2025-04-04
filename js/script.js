@@ -187,19 +187,3 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateOnScroll);
 });
 
-const markers = [
-    // MODIFICA QUI: Aggiungi o modifica i puntatori
-    {
-        coords: [45.4642, 9.1900], // Sostituisci con le coordinate desiderate [latitudine, longitudine]
-        title: "Milano", // Cambia il titolo
-        content: "La capitale della moda italiana", // Cambia il contenuto del popup
-        color: "blue" // Cambia il colore (blue, red, green o altri definiti nello stile)
-    },
-    {
-        coords: [41.9028, 12.4964], // Roma
-        title: "Roma",
-        content: "La Città Eterna",
-        color: "red"
-    },
-    // Aggiungi altri puntatori qui se necessario
-];

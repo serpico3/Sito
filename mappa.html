@@ -3,28 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mappa di Roma</title>
+    <title>Sticker Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="/css/maps.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/js/script.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="map-page">
     <!-- Pulsante per tornare indietro -->
-    <a href="javascript:history.back()" class="back-button">
+    <a href="index.html" class="back-button">
         <i class="fas fa-arrow-left"></i> Torna indietro
     </a>
 
     <!-- Titolo ridotto -->
-    <h1 class="map-title">Mappa di Roma</h1>
+    <h1 class="map-title">Found this sticker? Snap a pic and DM me on Instagram @diegoserpelloni (link’s on the website). Coffee’s on me — seriously, I owe you one!</h1>
+    <h1 class="map-title">Here’s where all the others are hiding!</h1>
 
     <!-- Contenitore della mappa a schermo intero -->
     <div id="map-container"></div>
-
-    <!-- Footer minimale -->
-    <div class="map-footer">
-        <p>Mappa interattiva del centro di Roma</p>
-    </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
@@ -43,12 +40,7 @@
                     iconSize: [30, 42],
                     iconAnchor: [15, 42]
                 })
-            }).addTo(map).bindPopup(`
-                <div class="map-popup">
-                    <h3>Colosseo</h3>
-                    <p>Anfiteatro Flavio, il più grande del mondo romano</p>
-                </div>
-            `).openPopup();
+            }).addTo(map).openPopup();
         }
         document.addEventListener('DOMContentLoaded', initMap);
     </script>
