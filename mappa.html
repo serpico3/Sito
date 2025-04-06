@@ -33,6 +33,8 @@
             const ArenaVerona = [45.439021,10.994932]; // Coordinate dell'Arena di Verona
             const dubliners = [45.347914,10.842165]; // Coordinate del pub Dubliners
             const kokkai =  [45.356846,10.945997]; // Coordinate del pub Kokkai
+            const PrimoRound = [45.2831,10.8708] // Coordinate del pub Primo Round
+
             const map = L.map('map-container').setView(starting_point, 15);
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -76,6 +78,15 @@
             }).addTo(map).openPopup();
 
             L.marker(kokkai, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(PrimoRound, {
                 icon: L.divIcon({ 
                     className: 'custom-marker',
                     html: '<div class="marker-pin red"></div>',
