@@ -28,8 +28,11 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         function initMap() {
-            const starting_point = [41.8902, 12.4924]; // Coordinate di partenza
+            const starting_point = [45.403526,10.999001]; // Coordinate dell'università di verona
             const Prague = [50.0755, 14.4378]; // Coordinate di Praga
+            const ArenaVerona = [45.4384, 10.9332]; // Coordinate dell'Arena di Verona
+            const dubliners = [45.347914,10.842165]; // Coordinate del pub Dubliners
+            const kokkai =  [45.356846,10.945997]; // Coordinate del pub Kokkai
             const map = L.map('map-container').setView(starting_point, 15);
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -46,6 +49,33 @@
             }).addTo(map).openPopup();
 
             L.marker(Prague, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(ArenaVerona, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+        
+            L.marker(dubliners, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(kokkai, {
                 icon: L.divIcon({ 
                     className: 'custom-marker',
                     html: '<div class="marker-pin red"></div>',
