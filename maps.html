@@ -37,6 +37,9 @@
             const ITS = [45.430742,10.999527] // Coordinate dell'ITS Last Accademy
             const bottegaDelCrapfen = [45.437882,11.002186] //coordinate della bottega del crapfen
             const Dorian = [45.380782,10.997143] // Coordinate della discoteca Dorian
+            const equixly = [45.404267,10.970315] // Coordinate dell'azienda Equixly
+            const maxim = [45.43709,11.031329] //coordinate hotel maxim (cybergame)
+            const vangog = [52.357925,4.881323] //coordinate museo vangog amsterdam (appeso da matteo todesco ITS)
 
             const map = L.map('map-container').setView(starting_point, 15);
             
@@ -117,6 +120,33 @@
             }).addTo(map).openPopup();
 
             L.marker(Dorian, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(equixly, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(maxim, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(vangog, {
                 icon: L.divIcon({ 
                     className: 'custom-marker',
                     html: '<div class="marker-pin red"></div>',
