@@ -41,6 +41,7 @@
             const maxim = [45.43709,11.031329] //coordinate hotel maxim (cybergame)
             const vangog = [52.357925,4.881323] //coordinate museo vangog amsterdam (appeso da matteo todesco ITS)
             const chiringuito = [45.133608,10.790188] //coordinate chiringuito discoteca mantova
+            const ritual = [45.474239,10.853977] //coordinate del ritual bar di bussolengo
 
             const map = L.map('map-container').setView(starting_point, 15);
             
@@ -157,6 +158,15 @@
             }).addTo(map).openPopup();
 
             L.marker(chiringuito, {
+                icon: L.divIcon({ 
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin red"></div>',
+                    iconSize: [30, 42],
+                    iconAnchor: [15, 42]
+                })
+            }).addTo(map).openPopup();
+
+            L.marker(ritual, {
                 icon: L.divIcon({ 
                     className: 'custom-marker',
                     html: '<div class="marker-pin red"></div>',
