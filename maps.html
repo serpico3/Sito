@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sticker Maps</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Stili base della mappa */
         body.map-page {
             margin: 0;
             padding: 0;
@@ -44,203 +42,108 @@
             width: 100%;
         }
         
-        /* Stili per i marker personalizzati */
         .custom-marker {
-            position: relative;
-        }
-        
-        .marker-pin {
-            width: 30px;
-            height: 30px;
-            border-radius: 50% 50% 50% 0;
+            width: 14px;
+            height: 14px;
             background: #c30b82;
-            position: absolute;
-            transform: rotate(-45deg);
-            left: 50%;
-            top: 50%;
-            margin: -15px 0 0 -15px;
-        }
-        
-        .marker-pin::after {
-            content: '';
-            width: 24px;
-            height: 24px;
-            margin: 3px 0 0 3px;
-            background: #fff;
-            position: absolute;
             border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
         }
         
-        /* Stili per il popup personalizzato */
         .custom-popup {
-            padding: 10px;
+            padding: 8px;
             text-align: center;
         }
         
         .popup-title {
             font-weight: bold;
-            margin-bottom: 8px;
             color: #333;
-        }
-        
-        .directions-btn {
-            display: inline-block;
-            padding: 6px 12px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-        
-        .directions-btn:hover {
-            background-color: #218838;
-        }
-        
-        .directions-btn i {
-            margin-right: 5px;
         }
     </style>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9V2JK1D4T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Z9V2JK1D4T');
-</script>
-
 <body class="map-page">
-    <!-- Contenitore per i titoli e il pulsante -->
     <div class="header-container">
         <h1 class="map-title">Found this sticker? Snap a pic and DM me on Instagram @diegoserpelloni (link's on the website). Coffee's on me — seriously, I owe you one!</h1>
         <h1 class="map-title">Here's where all the others are hiding!</h1>
         <h1 class="map-title">
-            <a class="button" href="index.html">
-                <i>Back to the main page</i>
-            </a>
+            <a class="button" href="index.html"><i>Back to the main page</i></a>
         </h1>
     </div>
 
-    <!-- Contenitore della mappa -->
     <div id="map-container"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         function initMap() {
-            // Oggetto con tutte le posizioni e i loro nomi
             const locations = {
-                starting_point: {
-                    coords: [45.403526, 10.999001],
-                    name: "Università di Verona"
-                },
-                Prague: {
-                    coords: [50.085355, 14.413979],
-                    name: "Discoteca di Praga"
-                },  
-                LennonWall: {
-                    coords: [50.086171, 14.406835],
-                    name: "Lennon Wall"
-                },
-                ArenaVerona: {
-                    coords: [45.439021, 10.994932],
-                    name: "Arena di Verona"
-                },
-                dubliners: {
-                    coords: [45.347914, 10.842165],
-                    name: "Pub Dubliners"
-                },
-                kokkai: {
-                    coords: [45.356846, 10.945997],
-                    name: "Pub Kokkai"
-                },
-                PrimoRound: {
-                    coords: [45.2831, 10.8708],
-                    name: "Pub Primo Round"
-                },
-                ITS: {
-                    coords: [45.430742, 10.999527],
-                    name: "ITS Last Academy"
-                },
-                bottegaDelCrapfen: {
-                    coords: [45.437882, 11.002186],
-                    name: "Bottega del Crapfen"
-                },
-                Dorian: {
-                    coords: [45.380782, 10.997143],
-                    name: "Discoteca Dorian"
-                },
-                equixly: {
-                    coords: [45.404267, 10.970315],
-                    name: "Azienda Equixly"
-                },
-                maxim: {
-                    coords: [45.43709, 11.031329],
-                    name: "Hotel Maxim (Cybergame)"
-                },
-                vangog: {
-                    coords: [52.357925, 4.881323],
-                    name: "Museo Van Gogh Amsterdam"
-                },
-                chiringuito: {
-                    coords: [45.133608, 10.790188],
-                    name: "Chiringuito Discoteca Mantova"
-                },
-                ritual: {
-                    coords: [45.474239, 10.853977],
-                    name: "Ritual Bar Bussolengo"
-                },
-                ABS: {
-                    coords: [45.456417, 10.888020],
-                    name: "ABS computers"
-                },
-                MilanoCentrale: {
-                    coords: [45.487280, 9.203953],
-                    name: "Milano Centrale"
-                },
-                VKIKart: {
-                    coords: [45.509320, 11.445591],
-                    name: "VKI Kart Vicenza"
-                }
+                // --- ORIGINALI ---
+                starting_point: { coords: [45.403526, 10.999001], name: "Università di Verona" },
+                Prague: { coords: [50.085355, 14.413979], name: "Discoteca di Praga" },
+                LennonWall: { coords: [50.086171, 14.406835], name: "Lennon Wall" },
+                ArenaVerona: { coords: [45.439021, 10.994932], name: "Arena di Verona" },
+                dubliners: { coords: [45.347914, 10.842165], name: "Pub Dubliners" },
+                kokkai: { coords: [45.356846, 10.945997], name: "Pub Kokkai" },
+                PrimoRound: { coords: [45.2831, 10.8708], name: "Pub Primo Round" },
+                ITS: { coords: [45.430742, 10.999527], name: "ITS Last Academy" },
+                bottegaDelCrapfen: { coords: [45.437882, 11.002186], name: "Bottega del Crapfen" },
+                Dorian: { coords: [45.380782, 10.997143], name: "Discoteca Dorian" },
+                equixly: { coords: [45.404267, 10.970315], name: "Azienda Equixly" },
+                maxim: { coords: [45.43709, 11.031329], name: "Hotel Maxim (Cybergame)" },
+                vangog: { coords: [52.357925, 4.881323], name: "Museo Van Gogh Amsterdam" },
+                chiringuito: { coords: [45.133608, 10.790188], name: "Chiringuito Discoteca Mantova" },
+                ritual: { coords: [45.474239, 10.853977], name: "Ritual Bar Bussolengo" },
+                ABS: { coords: [45.456417, 10.888020], name: "ABS computers" },
+                MilanoCentrale: { coords: [45.487280, 9.203953], name: "Milano Centrale" },
+                VKIKart: { coords: [45.509320, 11.445591], name: "VKI Kart Vicenza" },
+
+                // --- NUOVI ---
+                BolognaCentrale: { coords: [44.505833, 11.341667], name: "Bologna Centrale" },
+                CasalecchioDiReno: { coords: [44.514, 11.305], name: "Casalecchio di Reno" },
+                Badolo: { coords: [44.335, 11.292], name: "Badolo (Sasso Marconi)" },
+                Monzuno: { coords: [44.407, 11.283], name: "Monzuno" },
+                Firenzuola: { coords: [44.141, 11.396], name: "Firenzuola" },
+                MadonnaDeiFornelli: { coords: [44.206, 11.266], name: "Madonna dei Fornelli" },
+                Fiesole: { coords: [43.802, 11.281], name: "Fiesole" },
+                Pietramala: { coords: [44.112, 11.343], name: "Pietramala" },
+                Firenze: { coords: [43.7696, 11.2558], name: "Firenze" },
+                Tokyo: { coords: [35.6895, 139.6917], name: "Tokyo" },
+                Shibuya: { coords: [35.6619, 139.7041], name: "Shibuya" },
+                Akihabara: { coords: [35.6987, 139.7730], name: "Akihabara" },
+                Hakone: { coords: [35.2321, 139.1069], name: "Hakone" },
+                Kyoto: { coords: [35.0116, 135.7681], name: "Kyoto" },
+                Nara: { coords: [34.6851, 135.8048], name: "Nara" },
+                Odawara: { coords: [35.2551, 139.1590], name: "Odawara" },
+                Gion: { coords: [35.0037, 135.7788], name: "Gion (Kyoto)" },
+                DenDenTown: { coords: [34.6655, 135.5032], name: "DenDen Town (Osaka)" },
+                AereoportoHongKong: { coords: [22.3186, 113.9410], name: "Aeroporto di Hong Kong" },
+
+                // --- AGGIUNTI ORA ---
+                SantAgata: { coords: [44.144, 11.302], name: "Sant'Agata" },
+                SanPieroASieve: { coords: [43.966, 11.373], name: "San Piero a Sieve" }
             };
 
-            const map = L.map('map-container').setView(locations.starting_point.coords, 15);
+            const map = L.map('map-container').setView(locations.starting_point.coords, 5);
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             
-            // Funzione per creare il contenuto del popup
-            function createPopupContent(name, coords) {
-                return `
-                    <div class="custom-popup">
-                        <div class="popup-title">${name}</div>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=${coords[0]},${coords[1]}" 
-                           target="_blank" 
-                           class="directions-btn">
-                            <i class="fas fa-directions"></i> Indicazioni
-                        </a>
-                    </div>
-                `;
-            }
-
-            // Aggiungi tutti i marker
-            for (const [key, location] of Object.entries(locations)) {
+            for (const location of Object.values(locations)) {
                 const marker = L.marker(location.coords, {
                     icon: L.divIcon({ 
                         className: 'custom-marker',
-                        html: '<div class="marker-pin red"></div>',
-                        iconSize: [30, 42],
-                        iconAnchor: [15, 42]
+                        iconSize: [14, 14],
+                        iconAnchor: [7, 7]
                     })
                 }).addTo(map);
                 
-                // Aggiungi popup al marker
-                marker.bindPopup(createPopupContent(location.name, location.coords));
+                marker.bindPopup(`
+                    <div class="custom-popup">
+                        <div class="popup-title">${location.name}</div>
+                    </div>
+                `);
             }
         }
         
