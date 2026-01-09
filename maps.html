@@ -42,23 +42,24 @@
             width: 100%;
         }
         
-        .custom-marker {
-            width: 14px;
-            height: 14px;
-            background: #c30b82;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            box-shadow: 0 0 3px rgba(0,0,0,0.3);
-        }
-        
         .custom-popup {
-            padding: 8px;
+            padding: 12px;
             text-align: center;
+            min-width: 200px;
         }
         
         .popup-title {
             font-weight: bold;
             color: #333;
+            margin-bottom: 8px;
+        }
+
+        .color-picker {
+            width: 100%;
+            height: 30px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -78,46 +79,48 @@
     <script>
         function initMap() {
             const locations = {
-                // --- ORIGINALI ---
-                starting_point: { coords: [45.403526, 10.999001], name: "Università di Verona" },
-                Prague: { coords: [50.085355, 14.413979], name: "Discoteca di Praga" },
-                LennonWall: { coords: [50.086171, 14.406835], name: "Lennon Wall" },
-                ArenaVerona: { coords: [45.439021, 10.994932], name: "Arena di Verona" },
-                dubliners: { coords: [45.347914, 10.842165], name: "Pub Dubliners" },
-                kokkai: { coords: [45.356846, 10.945997], name: "Pub Kokkai" },
-                PrimoRound: { coords: [45.2831, 10.8708], name: "Pub Primo Round" },
-                ITS: { coords: [45.430742, 10.999527], name: "ITS Last Academy" },
-                bottegaDelCrapfen: { coords: [45.437882, 11.002186], name: "Bottega del Crapfen" },
-                Dorian: { coords: [45.380782, 10.997143], name: "Discoteca Dorian" },
-                equixly: { coords: [45.404267, 10.970315], name: "Azienda Equixly" },
-                maxim: { coords: [45.43709, 11.031329], name: "Hotel Maxim (Cybergame)" },
-                vangog: { coords: [52.357925, 4.881323], name: "Museo Van Gogh Amsterdam" },
-                chiringuito: { coords: [45.133608, 10.790188], name: "Chiringuito Discoteca Mantova" },
-                ritual: { coords: [45.474239, 10.853977], name: "Ritual Bar Bussolengo" },
-                ABS: { coords: [45.456417, 10.888020], name: "ABS computers" },
-                MilanoCentrale: { coords: [45.487280, 9.203953], name: "Milano Centrale" },
-                VKIKart: { coords: [45.509320, 11.445591], name: "VKI Kart Vicenza" },
-                BolognaCentrale: { coords: [44.505833, 11.341667], name: "Bologna Centrale" },
-                CasalecchioDiReno: { coords: [44.514, 11.305], name: "Casalecchio di Reno" },
-                Badolo: { coords: [44.335, 11.292], name: "Badolo (Sasso Marconi)" },
-                Monzuno: { coords: [44.407, 11.283], name: "Monzuno" },
-                Firenzuola: { coords: [44.141, 11.396], name: "Firenzuola" },
-                MadonnaDeiFornelli: { coords: [44.206, 11.266], name: "Madonna dei Fornelli" },
-                Fiesole: { coords: [43.802, 11.281], name: "Fiesole" },
-                Pietramala: { coords: [44.112, 11.343], name: "Pietramala" },
-                Firenze: { coords: [43.7696, 11.2558], name: "Firenze" },
-                Tokyo: { coords: [35.6895, 139.6917], name: "Tokyo" },
-                Shibuya: { coords: [35.6619, 139.7041], name: "Shibuya" },
-                Akihabara: { coords: [35.6987, 139.7730], name: "Akihabara" },
-                Hakone: { coords: [35.2321, 139.1069], name: "Hakone" },
-                Kyoto: { coords: [35.0116, 135.7681], name: "Kyoto" },
-                Nara: { coords: [34.6851, 135.8048], name: "Nara" },
-                Odawara: { coords: [35.2551, 139.1590], name: "Odawara" },
-                Gion: { coords: [35.0037, 135.7788], name: "Gion (Kyoto)" },
-                DenDenTown: { coords: [34.6655, 135.5032], name: "DenDen Town (Osaka)" },
-                AereoportoHongKong: { coords: [22.3186, 113.9410], name: "Aeroporto di Hong Kong" },
-                SantAgata: { coords: [44.144, 11.302], name: "Sant'Agata" },
-                SanPieroASieve: { coords: [43.966, 11.373], name: "San Piero a Sieve" }
+                starting_point: { coords: [45.403526, 10.999001], name: "Università di Verona", color: "#c30b82" },
+                Prague: { coords: [50.085355, 14.413979], name: "Discoteca di Praga", color: "#c30b82" },
+                LennonWall: { coords: [50.086171, 14.406835], name: "Lennon Wall", color: "#c30b82" },
+                ArenaVerona: { coords: [45.439021, 10.994932], name: "Arena di Verona", color: "#c30b82" },
+                dubliners: { coords: [45.347914, 10.842165], name: "Pub Dubliners", color: "#c30b82" },
+                kokkai: { coords: [45.356846, 10.945997], name: "Pub Kokkai", color: "#c30b82" },
+                PrimoRound: { coords: [45.2831, 10.8708], name: "Pub Primo Round", color: "#c30b82" },
+                ITS: { coords: [45.430742, 10.999527], name: "ITS Last Academy", color: "#c30b82" },
+                bottegaDelCrapfen: { coords: [45.437882, 11.002186], name: "Bottega del Crapfen", color: "#c30b82" },
+                Dorian: { coords: [45.380782, 10.997143], name: "Discoteca Dorian", color: "#c30b82" },
+                equixly: { coords: [45.404267, 10.970315], name: "Azienda Equixly", color: "#c30b82" },
+                maxim: { coords: [45.43709, 11.031329], name: "Hotel Maxim (Cybergame)", color: "#c30b82" },
+                vangog: { coords: [52.357925, 4.881323], name: "Museo Van Gogh Amsterdam", color: "#0bc352" }, //messo da matteo ITS
+                chiringuito: { coords: [45.133608, 10.790188], name: "Chiringuito Discoteca Mantova", color: "#c30b82" },
+                ritual: { coords: [45.474239, 10.853977], name: "Ritual Bar Bussolengo", color: "#c30b82" },
+                ABS: { coords: [45.456417, 10.888020], name: "ABS computers", color: "#c30b82" },
+                MilanoCentrale: { coords: [45.487280, 9.203953], name: "Milano Centrale", color: "#c30b82" },
+                VKIKart: { coords: [45.509320, 11.445591], name: "VKI Kart Vicenza", color: "#c30b82" },
+                BolognaCentrale: { coords: [44.505833, 11.341667], name: "Bologna Centrale", color: "#c30b82" },
+                CasalecchioDiReno: { coords: [44.514, 11.305], name: "Casalecchio di Reno", color: "#c30b82" },
+                Badolo: { coords: [44.335, 11.292], name: "Badolo (Sasso Marconi)", color: "#c30b82" },
+                Monzuno: { coords: [44.407, 11.283], name: "Monzuno", color: "#c30b82" },
+                Firenzuola: { coords: [44.141, 11.396], name: "Firenzuola", color: "#c30b82" },
+                MadonnaDeiFornelli: { coords: [44.206, 11.266], name: "Madonna dei Fornelli", color: "#c30b82" },
+                Fiesole: { coords: [43.802, 11.281], name: "Fiesole", color: "#c30b82" },
+                Pietramala: { coords: [44.112, 11.343], name: "Pietramala", color: "#c30b82" },
+                Firenze: { coords: [43.7696, 11.2558], name: "Firenze", color: "#c30b82" },
+                Tokyo: { coords: [35.6895, 139.6917], name: "Tokyo", color: "#c30b82" },
+                Shibuya: { coords: [35.6619, 139.7041], name: "Shibuya", color: "#c30b82" },
+                Akihabara: { coords: [35.6987, 139.7730], name: "Akihabara", color: "#c30b82" },
+                Hakone: { coords: [35.2321, 139.1069], name: "Hakone", color: "#c30b82" },
+                Kyoto: { coords: [35.0116, 135.7681], name: "Kyoto", color: "#c30b82" },
+                Nara: { coords: [34.6851, 135.8048], name: "Nara", color: "#c30b82" },
+                Odawara: { coords: [35.2551, 139.1590], name: "Odawara", color: "#c30b82" },
+                Gion: { coords: [35.0037, 135.7788], name: "Gion (Kyoto)", color: "#c30b82" },
+                DenDenTown: { coords: [34.6655, 135.5032], name: "DenDen Town (Osaka)", color: "#c30b82" },
+                AereoportoHongKong: { coords: [22.3186, 113.9410], name: "Aeroporto di Hong Kong", color: "#c30b82" },
+                SantAgata: { coords: [44.144, 11.302], name: "Sant'Agata", color: "#c30b82" },
+                SanPieroASieve: { coords: [43.966, 11.373], name: "San Piero a Sieve", color: "#c30b82" },
+                MadridBar: { coords: [40.4168, -3.7038], name: "Madrid Bar", color: "#0bc352" }, //messo da sofia Uni
+                kagenfurt: { coords: [46.6369, 14.3056], name: "Klagenfurt", color: "#c30b82" },
+                AustriaVienna: { coords: [48.2082, 16.3738], name: "Vienna", color: "#0bc352" } //messo da Sifia Uni
             };
 
             const map = L.map('map-container').setView(locations.starting_point.coords, 5);
@@ -126,10 +129,11 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             
-            for (const location of Object.values(locations)) {
+            for (const [key, location] of Object.entries(locations)) {
                 const marker = L.marker(location.coords, {
                     icon: L.divIcon({ 
                         className: 'custom-marker',
+                        html: `<div style="width: 14px; height: 14px; background: ${location.color}; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>`,
                         iconSize: [14, 14],
                         iconAnchor: [7, 7]
                     })
@@ -138,8 +142,22 @@
                 marker.bindPopup(`
                     <div class="custom-popup">
                         <div class="popup-title">${location.name}</div>
+                        <input type="color" class="color-picker" value="${location.color}" data-location="${key}">
                     </div>
                 `);
+
+                marker.on('popupopen', function() {
+                    const colorInput = document.querySelector(`input[data-location="${key}"]`);
+                    colorInput.addEventListener('change', function(e) {
+                        location.color = e.target.value;
+                        marker.setIcon(L.divIcon({
+                            className: 'custom-marker',
+                            html: `<div style="width: 14px; height: 14px; background: ${location.color}; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>`,
+                            iconSize: [14, 14],
+                            iconAnchor: [7, 7]
+                        }));
+                    });
+                });
             }
         }
         
