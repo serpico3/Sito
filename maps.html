@@ -120,7 +120,8 @@
                 SanPieroASieve: { coords: [43.966, 11.373], name: "San Piero a Sieve", color: "#c30b82" },
                 MadridBar: { coords: [40.4168, -3.7038], name: "Madrid Bar", color: "#0bc352" }, //messo da sofia Uni
                 kagenfurt: { coords: [46.6369, 14.3056], name: "Klagenfurt", color: "#c30b82" },
-                AustriaVienna: { coords: [48.2082, 16.3738], name: "Vienna", color: "#0bc352" } //messo da Sifia Uni
+                AustriaVienna: { coords: [48.2082, 16.3738], name: "Vienna", color: "#0bc352" }, //messo da Sifia Uni
+                VictoriaSquareBirmingham: { coords: [52.4814, -1.8998], name: "Victoria Square Birmingham", color: "#c30b82" },
             };
 
             const map = L.map('map-container').setView(locations.starting_point.coords, 5);
@@ -142,22 +143,8 @@
                 marker.bindPopup(`
                     <div class="custom-popup">
                         <div class="popup-title">${location.name}</div>
-                        <input type="color" class="color-picker" value="${location.color}" data-location="${key}">
                     </div>
                 `);
-
-                marker.on('popupopen', function() {
-                    const colorInput = document.querySelector(`input[data-location="${key}"]`);
-                    colorInput.addEventListener('change', function(e) {
-                        location.color = e.target.value;
-                        marker.setIcon(L.divIcon({
-                            className: 'custom-marker',
-                            html: `<div style="width: 14px; height: 14px; background: ${location.color}; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 3px rgba(0,0,0,0.3);"></div>`,
-                            iconSize: [14, 14],
-                            iconAnchor: [7, 7]
-                        }));
-                    });
-                });
             }
         }
         
