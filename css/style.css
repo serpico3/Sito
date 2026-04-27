@@ -280,6 +280,12 @@ body {
     background: linear-gradient(135deg, #f5f7fb, #edf2f8);
 }
 
+.project-img-homeserver {
+    object-fit: cover;
+    object-position: center 32%;
+    background: #eef3f5;
+}
+
 .tech-badge {
     background-color: rgba(126, 196, 207, 0.1);
     color: var(--primary-dark);
