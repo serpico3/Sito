@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fde2e4"/>
+      <stop offset="100%" stop-color="#cdb4db"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <path d="M600 180l110 90-40 130H530l-40-130z" fill="#ffffff" opacity="0.95"/>
+  <path d="M470 430h260l60 170H410z" fill="#2f3e46"/>
+  <path d="M520 300h160" stroke="#ef476f" stroke-width="16" stroke-linecap="round"/>
+  <path d="M450 250l-80 50M750 250l80 50M420 610l120-60M780 610l-120-60" stroke="#7a4eab" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="600" cy="350" r="30" fill="#ffd166"/>
+  <text x="70" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700" fill="#2f3e46">Cosplay</text>
+</svg>

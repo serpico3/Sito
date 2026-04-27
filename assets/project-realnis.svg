@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f3ff"/>
+      <stop offset="100%" stop-color="#98c1ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="180" y="190" width="360" height="420" rx="28" fill="#1f2a44"/>
+  <rect x="600" y="190" width="420" height="420" rx="28" fill="#ffffff" opacity="0.95"/>
+  <path d="M270 290h180M270 360h120M270 430h200M270 500h160" stroke="#7ec4cf" stroke-width="22" stroke-linecap="round"/>
+  <path d="M690 300l70 70 130-130M690 450l70 70 130-130" fill="none" stroke="#2f3e46" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M540 400h80" stroke="#ef476f" stroke-width="22" stroke-linecap="round"/>
+  <text x="70" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700" fill="#1f2a44">realNIS Workflow</text>
+</svg>

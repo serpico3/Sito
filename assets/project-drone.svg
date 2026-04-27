@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8ecae6"/>
+      <stop offset="100%" stop-color="#d9f0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <path d="M0 560c130-90 240-70 350-10 120 66 205 62 315-4 130-79 255-88 535 14v240H0z" fill="#5ca4b0"/>
+  <circle cx="600" cy="340" r="84" fill="#2f3e46"/>
+  <circle cx="450" cy="260" r="64" fill="none" stroke="#2f3e46" stroke-width="20"/>
+  <circle cx="750" cy="260" r="64" fill="none" stroke="#2f3e46" stroke-width="20"/>
+  <circle cx="450" cy="420" r="64" fill="none" stroke="#2f3e46" stroke-width="20"/>
+  <circle cx="750" cy="420" r="64" fill="none" stroke="#2f3e46" stroke-width="20"/>
+  <path d="M510 300l-50-20M690 300l50-20M510 380l-50 20M690 380l50 20" stroke="#2f3e46" stroke-width="18" stroke-linecap="round"/>
+  <text x="70" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700" fill="#2f3e46">Fotografia Aerea</text>
+</svg>

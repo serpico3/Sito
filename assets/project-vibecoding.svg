@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff0da"/>
+      <stop offset="100%" stop-color="#ffb86b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="170" y="170" width="860" height="470" rx="36" fill="#fffaf3"/>
+  <rect x="170" y="170" width="860" height="92" rx="36" fill="#2f3e46"/>
+  <circle cx="245" cy="217" r="11" fill="#ff6b6b"/>
+  <circle cx="282" cy="217" r="11" fill="#ffd166"/>
+  <circle cx="319" cy="217" r="11" fill="#7ec4cf"/>
+  <path d="M310 380l90-90 90 90M800 290l90 90-90 90" fill="none" stroke="#ff9f1c" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="465" y="336" width="270" height="88" rx="20" fill="#7ec4cf"/>
+  <rect x="310" y="500" width="580" height="22" rx="11" fill="#d7e6ea"/>
+  <rect x="310" y="545" width="420" height="22" rx="11" fill="#d7e6ea"/>
+  <text x="70" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700" fill="#2f3e46">Vibe Coding</text>
+</svg>
