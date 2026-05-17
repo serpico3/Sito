@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="sideprojects-page">
     <header class="page-header text-center animate__animated animate__fadeIn">
         <div class="container">
             <h1 class="display-3 fw-bold mb-3">I Miei Side Projects</h1>
@@ -32,108 +32,150 @@
             </a>
         </div>
 
-        <div class="row g-4 animate__animated animate__fadeIn animate__delay-1s">
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="sticker">
-                    <div class="project-media">
-                        <img src="assets/sticker.png"
-                             class="project-img project-img-sticker"
-                             alt="Sticker Map">
-                        <span class="project-badge">Map</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="fw-bold">Sticker Map</h3>
-                        <p class="text-muted">Una mappa interattiva per tracciare gli sticker che ho lasciato in giro per il mondo.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="pwsamba">
-                    <div class="project-media">
-                        <img src="assets/samba.png"
-                             class="project-img project-img-samba"
-                             alt="Project Work primo anno">
-                        <span class="project-badge">Linux</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="fw-bold">Project Work primo anno</h3>
-                        <p class="text-muted">Automazione della configurazione di un server Samba a partire da dati strutturati.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="stampa3d">
-                    <div class="project-media">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0QQ1ArxPFfJ1t77_GO_nvqt_6prXLRFDHLA&s"
-                             class="project-img project-img-code"
-                             alt="Stampa 3D">
-                        <span class="project-badge">Maker</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="fw-bold">Stampa 3D</h3>
-                        <p class="text-muted">Progetti di stampa 3D sviluppati tra prototipazione rapida, test tecnici e realizzazione pratica.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="labastia">
-                    <div class="project-media">
-                        <img src="https://qul.imgix.net/3a5a24a9-c54c-4537-8387-9d528c2140bc/762862_sld.jpg"
-                             class="project-img project-img-code"
-                             alt="Ristorante La Bastia">
-                        <span class="project-badge">Web</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="fw-bold">Ristorante La Bastia</h3>
-                        <p class="text-muted">Sviluppo del sito vetrina del ristorante, dalla UI alla pubblicazione online.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="pwsecondoanno">
+        <div class="projects-grid animate__animated animate__fadeIn animate__delay-1s">
+            <div class="project-tile project-tile-featured project-tile-primary">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="pwsecondoanno" role="button" tabindex="0">
                     <div class="project-media">
                         <img src="https://www.pianetasicurezza.it/wp-content/uploads/2025/02/NIS-2.jpg"
                              class="project-img project-img-code"
-                             alt="Project Work secondo anno">
-                        <span class="project-badge">Workflow</span>
+                             alt="NIS2 - Project Work secondo anno"
+                             loading="lazy">
+                        <span class="project-badge">NIS2</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="fw-bold">Project Work secondo anno</h3>
-                        <p class="text-muted">Contributo tecnico su realNIS tra dev container, workflow Git e collaborazione di team.</p>
+                        <div class="project-meta">
+                            <span><i class="bi bi-shield-check"></i> Cybersecurity</span>
+                            <span><i class="bi bi-people"></i> Team</span>
+                        </div>
+                        <h3 class="fw-bold">NIS2 - Project Work secondo anno</h3>
+                        <p class="text-muted">Supporto tecnico su realNIS: ambiente condiviso, flusso Git e collaborazione in team.</p>
+                        <span class="project-action">Apri dettagli <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="homeserver">
+            <div class="project-tile project-tile-featured project-tile-primary">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="homeserver" role="button" tabindex="0">
                     <div class="project-media">
                         <img src="https://i.redd.it/u5jwlxt1k43a1.jpg"
                              class="project-img project-img-homeserver"
-                             alt="Homeserver">
+                             alt="Homeserver"
+                             loading="lazy">
                         <span class="project-badge">Homelab</span>
                     </div>
                     <div class="card-body">
+                        <div class="project-meta">
+                            <span><i class="bi bi-server"></i> Homelab</span>
+                            <span><i class="bi bi-router"></i> Network</span>
+                        </div>
                         <h3 class="fw-bold">Homeserver</h3>
-                        <p class="text-muted">Laboratorio domestico per hosting di servizi, test di rete e sperimentazione Linux.</p>
+                        <p class="text-muted">Ambiente domestico per self-hosting, test di rete, servizi Linux e sperimentazione continua.</p>
+                        <a href="homeserver-proxmox.html" class="project-action">Leggi articolo <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-4">
-                <div class="card project-card border-0 shadow-sm rounded-4 overflow-hidden" data-project="vibecoding">
+            <div class="project-tile">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="sticker" role="button" tabindex="0">
+                    <div class="project-media">
+                        <img src="assets/sticker.png"
+                             class="project-img project-img-sticker"
+                             alt="Sticker Map"
+                             loading="lazy">
+                        <span class="project-badge">Map</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="project-meta">
+                            <span><i class="bi bi-geo-alt"></i> Interattivo</span>
+                            <span><i class="bi bi-arrow-up-right-circle"></i> Demo</span>
+                        </div>
+                        <h3 class="fw-bold">Sticker Map</h3>
+                        <p class="text-muted">Mappa interattiva per raccogliere e visualizzare i luoghi in cui compaiono i miei sticker.</p>
+                        <span class="project-action">Apri dettagli <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-tile">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="pwsamba" role="button" tabindex="0">
+                    <div class="project-media">
+                        <img src="assets/samba.png"
+                             class="project-img project-img-samba"
+                             alt="Project Work primo anno"
+                             loading="lazy">
+                        <span class="project-badge">Linux</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="project-meta">
+                            <span><i class="bi bi-terminal"></i> Python</span>
+                            <span><i class="bi bi-hdd-network"></i> Samba</span>
+                        </div>
+                        <h3 class="fw-bold">Project Work primo anno</h3>
+                        <p class="text-muted">Automazione di share, utenti e permessi Samba partendo da dati strutturati in CSV.</p>
+                        <span class="project-action">Apri dettagli <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-tile">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="stampa3d" role="button" tabindex="0">
+                    <div class="project-media">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0QQ1ArxPFfJ1t77_GO_nvqt_6prXLRFDHLA&s"
+                             class="project-img project-img-code"
+                             alt="Stampa 3D"
+                             loading="lazy">
+                        <span class="project-badge">Maker</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="project-meta">
+                            <span><i class="bi bi-box"></i> Maker</span>
+                            <span><i class="bi bi-tools"></i> Prototipi</span>
+                        </div>
+                        <h3 class="fw-bold">Stampa 3D</h3>
+                        <p class="text-muted">Prototipi e oggetti funzionali progettati, stampati e rifiniti in base a esigenze pratiche.</p>
+                        <span class="project-action">Apri dettagli <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-tile">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="labastia" role="button" tabindex="0">
+                    <div class="project-media">
+                        <img src="https://qul.imgix.net/3a5a24a9-c54c-4537-8387-9d528c2140bc/762862_sld.jpg"
+                             class="project-img project-img-code"
+                             alt="Ristorante La Bastia"
+                             loading="lazy">
+                        <span class="project-badge">Web</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="project-meta">
+                            <span><i class="bi bi-window"></i> Web</span>
+                            <span><i class="bi bi-globe2"></i> Online</span>
+                        </div>
+                        <h3 class="fw-bold">Ristorante La Bastia</h3>
+                        <p class="text-muted">Sito vetrina completo per un ristorante, curato dalla struttura frontend alla pubblicazione.</p>
+                        <span class="project-action">Apri dettagli <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-tile">
+                <div class="card project-card border-0 shadow-sm overflow-hidden" data-project="vibecoding" role="button" tabindex="0">
                     <div class="project-media">
                         <img src="https://francescogruner.it/wp-content/uploads/2025/09/Vibe-Coding.png"
                              class="project-img project-img-code"
-                             alt="Vibe Coding">
+                             alt="Vibe Coding"
+                             loading="lazy">
                         <span class="project-badge">Prototype</span>
                     </div>
                     <div class="card-body">
+                        <div class="project-meta">
+                            <span><i class="bi bi-lightning-charge"></i> Rapid</span>
+                            <span><i class="bi bi-code-slash"></i> Frontend</span>
+                        </div>
                         <h3 class="fw-bold">Vibe Coding</h3>
-                        <p class="text-muted">Esperimenti web rapidi costruiti per testare idee, flussi e interfacce in poco tempo.</p>
+                        <p class="text-muted">Piccoli prototipi web realizzati velocemente per validare idee, layout e interazioni.</p>
+                        <span class="project-action">Apri dettagli <i class="bi bi-arrow-right"></i></span>
                     </div>
                 </div>
             </div>
@@ -151,7 +193,7 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-sticker"
                      alt="Sticker Map">
                 <h4>Descrizione</h4>
-                <p>Ho creato una mappa per raccogliere e visualizzare i punti in cui compaiono i miei sticker. E un progetto leggero e personale che unisce ironia, geografia e una piccola idea di community.</p>
+                <p>Ho creato una mappa per raccogliere e visualizzare i punti in cui compaiono i miei sticker. Il progetto nasce come esperimento leggero: unisce geografia, identita personale e una piccola idea di community, trasformando un oggetto fisico in una traccia consultabile online.</p>
             </div>
             <div class="modal-footer">
                 <a href="maps.html" class="btn btn-read-more">
@@ -172,13 +214,14 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-samba"
                      alt="Project Work primo anno">
                 <h4>Descrizione</h4>
-                <p>Project work del primo anno ITS dedicato all'automazione di un server Samba. Il progetto genera cartelle condivise, permessi e credenziali partendo da un file CSV, riducendo errori manuali e tempi di configurazione.</p>
+                <p>Project work del primo anno ITS dedicato all'automazione di un server Samba. Il progetto legge dati da un file CSV e li usa per generare cartelle condivise, utenti, credenziali e permessi, riducendo operazioni ripetitive ed errori manuali durante la configurazione.</p>
                 <h4 class="mt-4">Tecnologie utilizzate</h4>
                 <div class="mb-4">
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Python</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Samba</span>
-                    <span class="badge tech-badge rounded-pill me-2 mb-2">Linux Server</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Linux</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">CSV</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Automazione</span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -200,19 +243,14 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-code"
                      alt="Stampa 3D">
                 <h4>Descrizione</h4>
-                <p>Realizzo progetti di stampa 3D partendo da un'idea o da una necessita pratica, passando attraverso prototipazione, test e ottimizzazioni successive fino alla versione finale.</p>
+                <p>Realizzo progetti di stampa 3D partendo da un'idea o da una necessita pratica. Il lavoro comprende modellazione o adattamento del file, scelta dei parametri di stampa, prove fisiche e piccole ottimizzazioni fino a ottenere un oggetto realmente utilizzabile.</p>
                 <h4 class="mt-4">Strumenti e attivita</h4>
                 <div class="mb-4">
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Stampa 3D</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Prototipazione</span>
-                    <span class="badge tech-badge rounded-pill me-2 mb-2">Design</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Modellazione</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Testing</span>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-read-more">
-                    <i class="bi bi-book me-2"></i>Progetto personale
-                </a>
             </div>
         </div>
     </div>
@@ -228,7 +266,7 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-code"
                      alt="Ristorante La Bastia">
                 <h4>Descrizione</h4>
-                <p>Ho sviluppato il sito ristorantelabastia.com curando struttura frontend, versionamento del codice, pubblicazione e configurazione tecnica del dominio. Il progetto nasce come sito vetrina chiaro, rapido da consultare e coerente con l'identita del ristorante.</p>
+                <p>Ho sviluppato il sito ristorantelabastia.com curando struttura frontend, contenuti, versionamento del codice, pubblicazione e configurazione tecnica del dominio. L'obiettivo era creare un sito vetrina chiaro e rapido da consultare, con le informazioni essenziali subito accessibili da desktop e mobile.</p>
                 <h4 class="mt-4">Tecnologie utilizzate</h4>
                 <div class="mb-4">
                     <span class="badge tech-badge rounded-pill me-2 mb-2">HTML</span>
@@ -257,13 +295,14 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-code"
                      alt="Project Work secondo anno">
                 <h4>Descrizione</h4>
-                <p>Project work del secondo anno ITS sviluppato in team sul repository realNIS. Mi sono occupato della configurazione dei dev container, della gestione dei merge conflict e del supporto al workflow collaborativo per rendere l'ambiente di sviluppo piu stabile e condiviso.</p>
+                <p>Project work del secondo anno ITS sviluppato in team sul repository realNIS. Mi sono occupato della configurazione dei dev container, della gestione dei merge conflict e del supporto al workflow collaborativo, con l'obiettivo di rendere l'ambiente di sviluppo piu stabile, riproducibile e semplice da condividere tra i membri del gruppo.</p>
                 <h4 class="mt-4">Tecnologie utilizzate</h4>
                 <div class="mb-4">
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Git</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">GitHub</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Dev Containers</span>
-                    <span class="badge tech-badge rounded-pill me-2 mb-2">Team Workflow</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Workflow</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Collaborazione</span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -285,18 +324,19 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-homeserver"
                      alt="Homeserver">
                 <h4>Descrizione</h4>
-                <p>Gestisco un homeserver personale su cui ospito servizi, faccio test di rete e provo configurazioni Linux in un ambiente controllato. E il mio laboratorio pratico per imparare, validare soluzioni e sperimentare in autonomia.</p>
+                <p>Gestisco un homeserver personale come laboratorio tecnico domestico. Lo uso per ospitare servizi, provare configurazioni Linux, testare reti e validare soluzioni prima di applicarle altrove. E un progetto continuo, utile per imparare facendo e mantenere esperienza pratica su sistemi reali.</p>
                 <h4 class="mt-4">Tecnologie utilizzate</h4>
                 <div class="mb-4">
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Linux</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Docker</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">Networking</span>
-                    <span class="badge tech-badge rounded-pill me-2 mb-2">Self Hosting</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Self-hosting</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Monitoring</span>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-read-more">
-                    <i class="bi bi-book me-2"></i>Dettagli in aggiornamento
+                <a href="homeserver-proxmox.html" class="btn btn-read-more">
+                    <i class="bi bi-journal-text me-2"></i>Leggi articolo Proxmox
                 </a>
             </div>
         </div>
@@ -313,18 +353,21 @@
                      class="img-fluid rounded mb-4 project-modal-img project-img-code"
                      alt="Vibe Coding">
                 <h4>Descrizione</h4>
-                <p>Raccolgo in questa categoria piccoli progetti web nati per sperimentare rapidamente idee, layout e interazioni. Uno degli esempi e martedi.diegoserpelloni.com, creato con un approccio diretto e iterativo per trasformare un'idea in una pagina funzionante nel minor tempo possibile.</p>
+                <p>Raccolgo in questa categoria piccoli progetti web nati per sperimentare rapidamente idee, layout e interazioni. Tra gli esempi ci sono martedi.lovable.app e catering-cost-calculator.lovable.app: pagine costruite con un approccio diretto e iterativo per trasformare velocemente un'idea in qualcosa di navigabile, testabile e migliorabile.</p>
                 <h4 class="mt-4">Tecnologie utilizzate</h4>
                 <div class="mb-4">
                     <span class="badge tech-badge rounded-pill me-2 mb-2">HTML</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">CSS</span>
                     <span class="badge tech-badge rounded-pill me-2 mb-2">JavaScript</span>
-                    <span class="badge tech-badge rounded-pill me-2 mb-2">Rapid Prototyping</span>
+                    <span class="badge tech-badge rounded-pill me-2 mb-2">Prototipazione rapida</span>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="https://martedi.diegoserpelloni.com" class="btn btn-read-more">
-                    <i class="bi bi-book me-2"></i>Apri il progetto
+                <a href="https://martedi.lovable.app" class="btn btn-read-more me-2 mb-2">
+                    <i class="bi bi-box-arrow-up-right me-2"></i>Apri Martedi
+                </a>
+                <a href="https://catering-cost-calculator.lovable.app" class="btn btn-read-more mb-2">
+                    <i class="bi bi-box-arrow-up-right me-2"></i>Apri Catering Calculator
                 </a>
             </div>
         </div>

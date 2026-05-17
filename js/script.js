@@ -27,6 +27,13 @@ const setupProjectModals = function() {
                 document.body.style.overflow = "hidden";
             }
         });
+
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
     });
 
     // Chiusura modale
@@ -41,6 +48,16 @@ const setupProjectModals = function() {
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('project-modal')) {
             e.target.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    });
+
+    window.addEventListener('keydown', function(e) {
+        if (e.key !== 'Escape') return;
+
+        const openModal = document.querySelector('.project-modal[style*="block"]');
+        if (openModal) {
+            openModal.style.display = "none";
             document.body.style.overflow = "auto";
         }
     });
@@ -61,18 +78,10 @@ const setupSmoothScroll = function() {
     });
 };
 
-// Esegui al caricamento della pagina
-document.addEventListener('DOMContentLoaded', function() {
-    animateOnScroll();
-    setupProjectModals();
-    setupSmoothScroll();
-    
-    window.addEventListener('scroll', animateOnScroll);
-});
-
-// Aggiungi queste funzioni alla fine del file esistente
-
 function setupPhotographyGallery() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
     // Gestione click sulle cartelle
     document.querySelectorAll('.gallery-folder').forEach(folder => {
         folder.addEventListener('click', function(e) {
@@ -93,10 +102,10 @@ function setupPhotographyGallery() {
     });
 
     // Gestione lightbox
-    document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    document.querySelector('.lightbox-prev').addEventListener('click', prevPhoto);
-    document.querySelector('.lightbox-next').addEventListener('click', nextPhoto);
-    document.querySelector('.lightbox-download').addEventListener('click', downloadCurrentPhoto);
+    lightbox.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev')?.addEventListener('click', prevPhoto);
+    lightbox.querySelector('.lightbox-next')?.addEventListener('click', nextPhoto);
+    lightbox.querySelector('.lightbox-download')?.addEventListener('click', downloadCurrentPhoto);
 }
 
 let currentPhotos = [];
@@ -177,7 +186,6 @@ function downloadCurrentPhoto() {
     document.body.removeChild(link);
 }
 
-// Aggiorna l'evento DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     animateOnScroll();
     setupProjectModals();

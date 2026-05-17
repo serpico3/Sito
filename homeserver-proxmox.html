@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installazione Proxmox VE - Homeserver</title>
+    <meta name="description" content="Installazione e configurazione iniziale di Proxmox VE per un homeserver domestico, con rete, Tailscale e repository no-subscription.">
+    <meta name="author" content="Diego Serpelloni">
+    <meta property="og:title" content="Installazione Proxmox VE per homeserver">
+    <meta property="og:description" content="Prima fase del progetto homeserver: installazione Proxmox VE, rete, accesso remoto con Tailscale e repository.">
+    <meta property="og:type" content="article">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://diegoserpelloni.com/homeserver-proxmox.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="blog-page">
+    <header class="blog-hero animate__animated animate__fadeIn">
+        <div class="container">
+            <a href="sideproject.html" class="blog-back-link">
+                <i class="bi bi-arrow-left"></i>
+                Side Projects
+            </a>
+            <div class="blog-hero-content">
+                <p class="blog-kicker">Homeserver / Proxmox VE</p>
+                <h1>Installazione e configurazione iniziale di Proxmox VE per il mio homeserver domestico</h1>
+                <p class="blog-lead">In questo articolo racconto la prima fase del mio progetto homeserver: l'installazione e la configurazione iniziale di Proxmox VE su un server fisico domestico.</p>
+                <div class="blog-meta">
+                    <span><i class="bi bi-server"></i> Hypervisor</span>
+                    <span><i class="bi bi-router"></i> Rete</span>
+                    <span><i class="bi bi-shield-lock"></i> Tailscale</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="blog-layout container">
+        <aside class="blog-toc" aria-label="Indice articolo">
+            <strong>Indice</strong>
+            <a href="#obiettivo">Obiettivo</a>
+            <a href="#hardware">Hardware</a>
+            <a href="#installazione">Installazione</a>
+            <a href="#rete">Rete e DHCP</a>
+            <a href="#tailscale">Tailscale</a>
+            <a href="#repository">Repository</a>
+            <a href="#storage">Storage</a>
+            <a href="#stato-finale">Stato finale</a>
+        </aside>
+
+        <article class="blog-article">
+            <section id="obiettivo">
+                <p>L'obiettivo era creare una base stabile su cui costruire, nel tempo, un'infrastruttura casalinga piu completa. In questa fase mi sono concentrato sull'installazione dell'hypervisor, sulla configurazione di rete, sull'accesso remoto e sulla sistemazione dei repository.</p>
+                <p>Non entro ancora nella parte relativa ai servizi esposti, reverse proxy o Cloudflare, perche saranno argomenti di un articolo successivo.</p>
+            </section>
+
+            <section id="hardware">
+                <h2>Hardware utilizzato</h2>
+                <p>Per iniziare ho utilizzato un server fisico con caratteristiche semplici, ma sufficienti per un primo homeserver.</p>
+                <div class="blog-spec-grid">
+                    <div><span>CPU</span><strong>Intel Core i5-10505</strong></div>
+                    <div><span>GPU</span><strong>Intel UHD Graphics 630</strong></div>
+                    <div><span>RAM</span><strong>16 GB DDR4</strong></div>
+                    <div><span>SSD</span><strong>NVMe 240 GB</strong></div>
+                    <div><span>HDD</span><strong>SATA 500 GB</strong></div>
+                    <div><span>PSU</span><strong>Dell originale 200 W</strong></div>
+                </div>
+                <p>Ho deciso di installare Proxmox direttamente sull'SSD NVMe, lasciando il disco SATA come possibile storage secondario per utilizzi futuri. Durante l'installazione ho scelto il filesystem ext4, preferendo una configurazione semplice e lineare per partire senza complicare subito la gestione dello storage.</p>
+            </section>
+
+            <section id="installazione">
+                <h2>Installazione di Proxmox VE</h2>
+                <p>L'installazione di Proxmox VE e stata effettuata sul disco:</p>
+                <pre><code>/dev/nvme0n1</code></pre>
+                <p>Durante il setup ho configurato il nodo con questi dati:</p>
+                <div class="blog-config-card">
+                    <dl>
+                        <div><dt>Hostname</dt><dd>pve</dd></div>
+                        <div><dt>FQDN</dt><dd>pve.home.arpa</dd></div>
+                        <div><dt>IP iniziale</dt><dd>192.168.100.2/24</dd></div>
+                        <div><dt>Gateway</dt><dd>192.168.100.1</dd></div>
+                        <div><dt>Filesystem</dt><dd>ext4</dd></div>
+                    </dl>
+                </div>
+                <p>Inizialmente avevo valutato un nome host/FQDN diverso, ma poi ho scelto <code>pve.home.arpa</code>. Questa scelta e piu corretta per una rete domestica, perche il dominio <code>.home.arpa</code> e pensato per ambienti locali e privati.</p>
+            </section>
+
+            <section id="rete">
+                <h2>Il problema della rete</h2>
+                <p>Una delle prime difficolta e stata la rete. Nel mio caso non parto da una classica rete domestica con router pienamente configurabile. La connessione puo dipendere da un dispositivo non completamente gestibile, per esempio un telefono in hotspot o un apparato che non permette di impostare comodamente DHCP reservation, IP statici dal router, port forwarding, DNS locale o regole di rete avanzate.</p>
+                <p>Questo e un problema importante per un server, perche normalmente un nodo Proxmox dovrebbe avere un indirizzo IP stabile. L'interfaccia Proxmox si raggiunge normalmente tramite:</p>
+                <pre><code>https://IP_DEL_NODO:8006</code></pre>
+                <p>Nel mio caso configurare un IP statico nella LAN non era la soluzione piu affidabile. Anche se durante l'installazione ho impostato un IP iniziale, il vero problema era avere un accesso stabile nel tempo, soprattutto in caso di cambi rete o variazioni lato DHCP.</p>
+
+                <h3>DHCP e accesso a Proxmox</h3>
+                <p>Proxmox puo funzionare anche con DHCP, ma per un server non e l'ideale. Se il router assegna un indirizzo diverso, l'interfaccia web non sara piu raggiungibile allo stesso IP.</p>
+                <p>In una rete classica avrei risolto con una prenotazione DHCP sul router, un IP statico configurato correttamente, un DNS locale o un router dedicato. Non avendo un router realmente gestibile, ho scelto una strada diversa: usare Tailscale come metodo principale per raggiungere il nodo Proxmox.</p>
+            </section>
+
+            <section id="tailscale">
+                <h2>Perche ho scelto Tailscale</h2>
+                <p>Tailscale mi permette di accedere al server anche se l'IP locale cambia, non ho un IP pubblico, non posso aprire porte sul router, sono dietro NAT o sto usando una rete temporanea e non completamente sotto il mio controllo.</p>
+                <p>Dopo aver installato e configurato Tailscale direttamente sul nodo Proxmox, il server e comparso nella mia tailnet e ho potuto raggiungerlo usando il suo indirizzo Tailscale.</p>
+                <pre><code>https://IP_TAILSCALE_DEL_NODO:8006</code></pre>
+                <p>Oppure, se MagicDNS e abilitato:</p>
+                <pre><code>https://NOME_HOST_TAILSCALE:8006</code></pre>
+                <p>Questa soluzione mi ha permesso di bypassare completamente il problema dell'IP locale non stabile. Anche se cambia l'indirizzo assegnato dalla rete LAN, il nodo rimane raggiungibile tramite Tailscale.</p>
+
+                <h3>Problema avuto con l'accesso tramite Tailscale</h3>
+                <p>Durante la configurazione ho avuto anche un problema di accesso: non riuscivo piu a raggiungere la console di Proxmox tramite Tailscale. Dal telefono vedevo collegato solo Home Assistant, mentre il nodo Proxmox non sembrava raggiungibile come mi aspettavo.</p>
+                <p>La situazione si e risolta verificando la connettivita e il corretto stato del nodo nella rete Tailscale. Una volta che Proxmox e risultato effettivamente collegato alla tailnet, l'accesso e tornato a funzionare. Da quel momento ho considerato Tailscale come canale principale per l'amministrazione remota del nodo.</p>
+
+                <h3>Considerazioni sul Wi-Fi</h3>
+                <p>Proxmox e pensato per lavorare principalmente con rete cablata Ethernet. Usare il Wi-Fi come interfaccia principale non e consigliato, perche puo creare problemi di stabilita e gestione della rete.</p>
+                <p>Per un homeserver la soluzione migliore resta una connessione Ethernet. Una possibile soluzione futura potrebbe essere usare un router dedicato o un travel router che riceve la connessione e fornisce al server una rete piu stabile via cavo.</p>
+            </section>
+
+            <section id="repository">
+                <h2>Sistemazione dei repository Proxmox</h2>
+                <p>Dopo l'installazione, Proxmox mostrava problemi legati ai repository Enterprise. Questo succede perche Proxmox, di default, puo includere repository pensati per chi ha una sottoscrizione attiva.</p>
+                <p>Ho controllato la cartella:</p>
+                <pre><code>/etc/apt/sources.list.d/</code></pre>
+                <p>All'interno erano presenti file come:</p>
+                <pre><code>pve-enterprise.sources
+tailscale.list</code></pre>
+                <p>Il repository Enterprise e stato disabilitato, mentre e stato configurato il repository no-subscription corretto per Proxmox VE su Debian Trixie.</p>
+                <ul class="blog-checklist">
+                    <li>Repository Enterprise disabilitato</li>
+                    <li>Repository no-subscription abilitato</li>
+                    <li>Repository Tailscale presente e funzionante</li>
+                </ul>
+                <p>Questo passaggio e importante per evitare errori o avvisi continui legati alla mancanza di una sottoscrizione Enterprise durante gli aggiornamenti.</p>
+            </section>
+
+            <section id="storage">
+                <h2>Scelta di non complicare subito lo storage</h2>
+                <p>Avendo un solo disco NVMe principale e un disco SATA secondario, avrei potuto pensare subito a una configurazione piu complessa, ma ho preferito partire semplice.</p>
+                <ul class="blog-checklist">
+                    <li>Proxmox installato su singolo SSD NVMe</li>
+                    <li>Filesystem ext4</li>
+                    <li>Nessun RAID iniziale</li>
+                    <li>Backup da pianificare successivamente</li>
+                </ul>
+                <p>Questa scelta mi permette di iniziare subito a lavorare sul server, senza bloccare il progetto nella fase iniziale. In futuro, per dati importanti, sara necessario ragionare bene su backup, storage esterno, eventuale NAS o strategie piu robuste.</p>
+            </section>
+
+            <section id="stato-finale">
+                <h2>Stato finale della configurazione</h2>
+                <div class="blog-config-card">
+                    <dl>
+                        <div><dt>Hostname</dt><dd>pve</dd></div>
+                        <div><dt>FQDN</dt><dd>pve.home.arpa</dd></div>
+                        <div><dt>IP management iniziale</dt><dd>192.168.100.2/24</dd></div>
+                        <div><dt>Gateway</dt><dd>192.168.100.1</dd></div>
+                        <div><dt>Filesystem</dt><dd>ext4</dd></div>
+                        <div><dt>Disco di installazione</dt><dd>/dev/nvme0n1</dd></div>
+                        <div><dt>Accesso web</dt><dd>https://IP_DEL_NODO:8006</dd></div>
+                        <div><dt>Accesso remoto stabile</dt><dd>tramite Tailscale</dd></div>
+                    </dl>
+                </div>
+                <p>Il nodo e raggiungibile anche senza IP pubblico, senza port forwarding e senza dipendere completamente dal DHCP del router.</p>
+            </section>
+
+            <section>
+                <h2>Conclusione</h2>
+                <p>Questa prima fase mi ha permesso di ottenere una base Proxmox funzionante e raggiungibile in modo affidabile.</p>
+                <p>La parte piu delicata non e stata tanto l'installazione in se, quanto la gestione della rete. Non avendo un router completo su cui impostare DHCP statico, port forwarding o regole avanzate, ho dovuto trovare una soluzione alternativa per non perdere l'accesso al server.</p>
+                <p>Tailscale si e rivelato fondamentale: mi permette di amministrare Proxmox anche se l'indirizzo LAN cambia o se la rete non e completamente sotto il mio controllo.</p>
+                <p>A questo punto ho un nodo Proxmox pulito, aggiornabile e raggiungibile da remoto. La base e pronta per i prossimi passaggi del progetto homeserver, che trattero in un articolo successivo.</p>
+            </section>
+        </article>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
