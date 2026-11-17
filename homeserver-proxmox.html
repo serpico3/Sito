@@ -58,16 +58,16 @@
 
             <section id="hardware">
                 <h2>Hardware utilizzato</h2>
-                <p>Per iniziare ho utilizzato un server fisico con caratteristiche semplici, ma sufficienti per un primo homeserver.</p>
-                <div class="blog-spec-grid">
-                    <div><span>CPU</span><strong>Intel Core i5-10505</strong></div>
-                    <div><span>GPU</span><strong>Intel UHD Graphics 630</strong></div>
-                    <div><span>RAM</span><strong>16 GB DDR4</strong></div>
-                    <div><span>SSD</span><strong>NVMe 240 GB</strong></div>
-                    <div><span>HDD</span><strong>SATA 500 GB</strong></div>
-                    <div><span>PSU</span><strong>Dell originale 200 W</strong></div>
-                </div>
-                <p>Ho deciso di installare Proxmox direttamente sull'SSD NVMe, lasciando il disco SATA come possibile storage secondario per utilizzi futuri. Durante l'installazione ho scelto il filesystem ext4, preferendo una configurazione semplice e lineare per partire senza complicare subito la gestione dello storage.</p>
+                <p>La configurazione iniziale del server è cresciuta nel tempo per ospitare più servizi in modo affidabile, mantenendo una struttura semplice da gestire.</p>
+                <ul class="blog-checklist">
+                    <li>CPU Intel Core i5-10505 con grafica Intel UHD 630</li>
+                    <li>32 GB di RAM DDR4</li>
+                    <li>NVMe da 256 GB dedicato a Proxmox VE</li>
+                    <li>SSD da 512 GB dedicato ai backup delle macchine virtuali</li>
+                    <li>Due HDD da 4 TB in mirror ZFS per i dati dei servizi</li>
+                    <li>Controller SATA PCIe a 6 porte e alimentatore MSI MAG A850GLS PCIE5</li>
+                </ul>
+                <p>Il mirror ZFS offre circa 3,62 TB utilizzabili: i dati restano disponibili anche in caso di guasto di uno dei due dischi, ma non sostituisce un backup separato.</p>
             </section>
 
             <section id="installazione">
@@ -79,8 +79,8 @@
                     <dl>
                         <div><dt>Hostname</dt><dd>pve</dd></div>
                         <div><dt>FQDN</dt><dd>pve.home.arpa</dd></div>
-                        <div><dt>IP iniziale</dt><dd>192.168.100.2/24</dd></div>
-                        <div><dt>Gateway</dt><dd>192.168.100.1</dd></div>
+                        <div><dt>IP iniziale</dt><dd>192.168.8.20</dd></div>
+                        <div><dt>Gateway</dt><dd>router della LAN</dd></div>
                         <div><dt>Filesystem</dt><dd>ext4</dd></div>
                     </dl>
                 </div>
@@ -88,15 +88,18 @@
             </section>
 
             <section id="rete">
-                <h2>Il problema della rete</h2>
-                <p>Una delle prime difficolta e stata la rete. Nel mio caso non parto da una classica rete domestica con router pienamente configurabile. La connessione puo dipendere da un dispositivo non completamente gestibile, per esempio un telefono in hotspot o un apparato che non permette di impostare comodamente DHCP reservation, IP statici dal router, port forwarding, DNS locale o regole di rete avanzate.</p>
-                <p>Questo e un problema importante per un server, perche normalmente un nodo Proxmox dovrebbe avere un indirizzo IP stabile. L'interfaccia Proxmox si raggiunge normalmente tramite:</p>
-                <pre><code>https://IP_DEL_NODO:8006</code></pre>
-                <p>Nel mio caso configurare un IP statico nella LAN non era la soluzione piu affidabile. Anche se durante l'installazione ho impostato un IP iniziale, il vero problema era avere un accesso stabile nel tempo, soprattutto in caso di cambi rete o variazioni lato DHCP.</p>
-
-                <h3>DHCP e accesso a Proxmox</h3>
-                <p>Proxmox puo funzionare anche con DHCP, ma per un server non e l'ideale. Se il router assegna un indirizzo diverso, l'interfaccia web non sara piu raggiungibile allo stesso IP.</p>
-                <p>In una rete classica avrei risolto con una prenotazione DHCP sul router, un IP statico configurato correttamente, un DNS locale o un router dedicato. Non avendo un router realmente gestibile, ho scelto una strada diversa: usare Tailscale come metodo principale per raggiungere il nodo Proxmox.</p>
+                <h2>La rete attuale</h2>
+                <p>Il server è collegato alla rete domestica 192.168.8.0/24, gestita dal router Huawei 4G+ CPE 5 B636. Per i servizi principali utilizzo indirizzi LAN stabili e una segmentazione logica semplice.</p>
+                <div class="blog-config-card">
+                    <dl>
+                        <div><dt>Proxmox VE</dt><dd>192.168.8.20</dd></div>
+                        <div><dt>Proxy</dt><dd>192.168.8.21</dd></div>
+                        <div><dt>Home Assistant</dt><dd>192.168.8.22</dd></div>
+                        <div><dt>Immich</dt><dd>192.168.8.24</dd></div>
+                        <div><dt>Jellyfin</dt><dd>192.168.8.25</dd></div>
+                    </dl>
+                </div>
+                <p>Per l'amministrazione remota uso Tailscale come subnet router. In questo modo Proxmox e i servizi interni non richiedono porte aperte sul router.</p>
             </section>
 
             <section id="tailscale">
@@ -135,37 +138,28 @@ tailscale.list</code></pre>
             </section>
 
             <section id="storage">
-                <h2>Scelta di non complicare subito lo storage</h2>
-                <p>Avendo un solo disco NVMe principale e un disco SATA secondario, avrei potuto pensare subito a una configurazione piu complessa, ma ho preferito partire semplice.</p>
-                <ul class="blog-checklist">
-                    <li>Proxmox installato su singolo SSD NVMe</li>
-                    <li>Filesystem ext4</li>
-                    <li>Nessun RAID iniziale</li>
-                    <li>Backup da pianificare successivamente</li>
-                </ul>
-                <p>Questa scelta mi permette di iniziare subito a lavorare sul server, senza bloccare il progetto nella fase iniziale. In futuro, per dati importanti, sara necessario ragionare bene su backup, storage esterno, eventuale NAS o strategie piu robuste.</p>
+                <h2>Storage e protezione dei dati</h2>
+                <p>La configurazione iniziale a disco singolo è stata sostituita da uno schema più solido: Proxmox rimane sul NVMe, mentre i dati importanti dei servizi sono archiviati su un mirror ZFS formato da due HDD da 4 TB.</p>
+                <p>Il mirror viene controllato periodicamente con scrub ZFS; l'ultimo controllo completato non ha rilevato errori. L'SSD dedicato ai backup mantiene separati i backup delle VM dal disco di sistema.</p>
+                <p>Questa separazione rende più semplice crescere con nuovi servizi senza mescolare sistema operativo, dati applicativi e copie di sicurezza.</p>
             </section>
 
             <section id="stato-finale">
-                <h2>Stato finale della configurazione</h2>
+                <h2>Stato attuale della configurazione</h2>
                 <div class="blog-config-card">
                     <dl>
-                        <div><dt>Hostname</dt><dd>pve</dd></div>
-                        <div><dt>FQDN</dt><dd>pve.home.arpa</dd></div>
-                        <div><dt>IP management iniziale</dt><dd>192.168.100.2/24</dd></div>
-                        <div><dt>Gateway</dt><dd>192.168.100.1</dd></div>
-                        <div><dt>Filesystem</dt><dd>ext4</dd></div>
-                        <div><dt>Disco di installazione</dt><dd>/dev/nvme0n1</dd></div>
-                        <div><dt>Accesso web</dt><dd>https://IP_DEL_NODO:8006</dd></div>
-                        <div><dt>Accesso remoto stabile</dt><dd>tramite Tailscale</dd></div>
+                        <div><dt>Host Proxmox VE</dt><dd>192.168.8.20, 32 GB RAM, NVMe da 256 GB per il sistema</dd></div>
+                        <div><dt>Storage dati</dt><dd>Mirror ZFS da 2 x 4 TB, circa 3,62 TB utilizzabili</dd></div>
+                        <div><dt>Storage backup</dt><dd>SSD dedicato da 512 GB</dd></div>
+                        <div><dt>Servizi attivi</dt><dd>Proxy, Home Assistant, Immich e Jellyfin in VM e container separati</dd></div>
+                        <div><dt>Accesso remoto</dt><dd>Tailscale per l'amministrazione privata; Cloudflare Tunnel e reverse proxy per i servizi web autorizzati</dd></div>
                     </dl>
                 </div>
-                <p>Il nodo e raggiungibile anche senza IP pubblico, senza port forwarding e senza dipendere completamente dal DHCP del router.</p>
             </section>
 
             <section>
                 <h2>Conclusione</h2>
-                <p>Questa prima fase mi ha permesso di ottenere una base Proxmox funzionante e raggiungibile in modo affidabile.</p>
+                <p>La base iniziale si è evoluta in un homeserver con storage ridondato, servizi separati e accesso remoto sicuro.</p>
                 <p>La parte piu delicata non e stata tanto l'installazione in se, quanto la gestione della rete. Non avendo un router completo su cui impostare DHCP statico, port forwarding o regole avanzate, ho dovuto trovare una soluzione alternativa per non perdere l'accesso al server.</p>
                 <p>Tailscale si e rivelato fondamentale: mi permette di amministrare Proxmox anche se l'indirizzo LAN cambia o se la rete non e completamente sotto il mio controllo.</p>
                 <p>A questo punto ho un nodo Proxmox pulito, aggiornabile e raggiungibile da remoto. La base e pronta per i prossimi passaggi del progetto homeserver, che trattero in un articolo successivo.</p>
