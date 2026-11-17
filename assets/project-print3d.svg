@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Stampa 3D e prototipazione</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef7f8"/>
+      <stop offset="100%" stop-color="#9ccbd2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="250" y="145" width="700" height="530" rx="34" fill="#2f3e46"/>
+  <rect x="315" y="215" width="570" height="330" rx="18" fill="#f9fcfc"/>
+  <path d="M420 515V330h160v185M420 330l80-70 80 70M420 515l80 70 80-70" fill="none" stroke="#7ec4cf" stroke-width="24" stroke-linejoin="round"/>
+  <path d="M650 330h150M725 260v140M650 440h150M725 440v85" stroke="#ef476f" stroke-width="22" stroke-linecap="round"/>
+  <rect x="365" y="590" width="470" height="30" rx="15" fill="#7ec4cf"/>
+  <text x="70" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="72" font-weight="700" fill="#2f3e46">Stampa 3D</text>
+</svg>
