@@ -114,22 +114,10 @@ Home Assistant</code></pre>
 
             <section id="container-proxy">
                 <h2>Creazione del container proxy</h2>
-                <p>Per gestire la pubblicazione dei servizi ho creato un container dedicato al ruolo di proxy.</p>
-                <p>Non ho installato tutto direttamente sul nodo Proxmox perche voglio mantenere l'host il piu pulito possibile. Proxmox deve occuparsi della virtualizzazione, mentre i servizi devono vivere in container o VM separati.</p>
+                <p>Per gestire la pubblicazione dei servizi utilizzo un container LXC dedicato al ruolo di proxy, separato dall'host Proxmox e dagli altri servizi.</p>
                 <p>Il container proxy ha IP statico:</p>
-                <pre><code>192.168.51.101</code></pre>
-                <p>Al suo interno ho installato:</p>
-                <ul class="blog-checklist">
-                    <li>Docker</li>
-                    <li>Nginx Proxy Manager</li>
-                    <li>cloudflared</li>
-                </ul>
-                <p>Questo container e diventato il punto centrale di ingresso per i servizi web.</p>
-                <p>La scelta di un proxy centrale e importante perche mi evita di dover configurare ogni servizio in modo separato e disordinato. In futuro potro usare lo stesso schema per altri sottodomini:</p>
-                <pre><code>homeassistant.diegoserpelloni.com -> Home Assistant
-status.diegoserpelloni.com        -> Uptime Kuma
-jellyfin.diegoserpelloni.com      -> Jellyfin
-immich.diegoserpelloni.com        -> Immich</code></pre>
+                <pre><code>192.168.8.21</code></pre>
+                <p>Al suo interno sono presenti Docker, Nginx Proxy Manager e Cloudflare Tunnel. Questo container è il punto centrale di ingresso per i servizi web pubblicati, mentre Proxmox e SSH restano accessibili solo dalla rete privata o tramite Tailscale.</p>
             </section>
 
             <section id="docker">
@@ -193,19 +181,19 @@ Nginx Proxy Manager
    |
 servizio interno</code></pre>
                 <p>Per Home Assistant, il servizio interno e:</p>
-                <pre><code>http://192.168.51.102:8123</code></pre>
+                <pre><code>http://192.168.8.22:8123</code></pre>
             </section>
 
             <section id="home-assistant">
                 <h2>Configurazione di Home Assistant</h2>
                 <p>Home Assistant ha ricevuto IP statico:</p>
-                <pre><code>192.168.51.102</code></pre>
+                <pre><code>192.168.8.22</code></pre>
                 <p>e usa la porta standard:</p>
                 <pre><code>8123</code></pre>
                 <p>In Nginx Proxy Manager ho quindi creato un proxy host per il dominio:</p>
                 <pre><code>homeassistant.diegoserpelloni.com</code></pre>
                 <p>con destinazione:</p>
-                <pre><code>http://192.168.51.102:8123</code></pre>
+                <pre><code>http://192.168.8.22:8123</code></pre>
                 <p>A livello logico, quando apro il dominio dal browser, la richiesta segue questo percorso:</p>
                 <pre><code>homeassistant.diegoserpelloni.com
    |
@@ -228,8 +216,8 @@ Home Assistant</code></pre>
                 <pre><code>http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 192.168.51.101</code></pre>
-                <p>Il valore 192.168.51.101 corrisponde all'IP del container proxy.</p>
+    - 192.168.8.21</code></pre>
+                <p>Il valore 192.168.8.21 corrisponde all'IP del container proxy.</p>
                 <p>Questa configurazione dice a Home Assistant:</p>
                 <ul class="blog-checklist">
                     <li>puoi fidarti delle richieste inoltrate da questo proxy</li>
@@ -276,40 +264,41 @@ accesso alla dashboard</code></pre>
             </section>
 
             <section id="stato-finale">
-                <h2>Stato finale della configurazione</h2>
+                <h2>Stato attuale della configurazione</h2>
                 <div class="blog-config-card">
                     <dl>
-                        <div><dt>Proxmox</dt><dd>hostname pve, FQDN pve.home.arpa, accesso amministrativo tramite Tailscale</dd></div>
-                        <div><dt>Container proxy</dt><dd>IP 192.168.51.101, servizi Docker, Nginx Proxy Manager e cloudflared</dd></div>
-                        <div><dt>Home Assistant</dt><dd>IP 192.168.51.102, porta 8123, dominio homeassistant.diegoserpelloni.com, MFA Microsoft Authenticator</dd></div>
-                        <div><dt>Cloudflare</dt><dd>dominio diegoserpelloni.com, tunnel homeserver, DNS e collegamento verso il proxy interno</dd></div>
+                        <div><dt>Proxmox</dt><dd>192.168.8.20, accesso amministrativo tramite Tailscale</dd></div>
+                        <div><dt>Container proxy</dt><dd>192.168.8.21, Docker, Nginx Proxy Manager e Cloudflare Tunnel</dd></div>
+                        <div><dt>Home Assistant</dt><dd>192.168.8.22, porta 8123, dominio homeassistant.diegoserpelloni.com e MFA</dd></div>
+                        <div><dt>Immich</dt><dd>192.168.8.24, VM Debian dedicata per la gestione della libreria fotografica</dd></div>
+                        <div><dt>Jellyfin</dt><dd>192.168.8.25, VM Debian dedicata alla libreria multimediale</dd></div>
+                        <div><dt>Cloudflare</dt><dd>dominio diegoserpelloni.com, tunnel e DNS per l'accesso ai servizi autorizzati</dd></div>
                     </dl>
                 </div>
             </section>
 
             <section id="sicurezza">
                 <h2>Considerazioni sulla sicurezza</h2>
-                <p>Questa configurazione riduce l'esposizione diretta della mia rete domestica.</p>
-                <p>Non ho aperto porte sul router, non ho pubblicato Proxmox e non ho esposto SSH. L'unico servizio reso raggiungibile dall'esterno in questa fase e Home Assistant, passando da Cloudflare Tunnel e dal reverse proxy.</p>
-                <p>La sicurezza e divisa su piu livelli:</p>
+                <p>La configurazione è progettata per ridurre l'esposizione diretta della rete domestica. Non ho aperto porte sul router e i servizi amministrativi non sono pubblicati su Internet.</p>
+                <p>La sicurezza è divisa su più livelli:</p>
                 <ul class="blog-checklist">
-                    <li>Cloudflare Tunnel evita il port forwarding</li>
-                    <li>Nginx Proxy Manager gestisce l'inoltro interno</li>
-                    <li>Home Assistant gestisce login e MFA</li>
-                    <li>Tailscale resta dedicato all'amministrazione</li>
+                    <li>Cloudflare Tunnel evita il port forwarding e inoltra solo i servizi espressamente configurati</li>
+                    <li>Nginx Proxy Manager gestisce l'inoltro verso i servizi interni</li>
+                    <li>Home Assistant protegge l'accesso con credenziali e MFA</li>
+                    <li>Tailscale resta dedicato all'amministrazione privata di Proxmox e della LAN</li>
+                    <li>VM e container separati limitano l'impatto di un problema su un singolo servizio</li>
                 </ul>
-                <p>Questa separazione rende l'infrastruttura piu ordinata e piu semplice da espandere.</p>
             </section>
 
             <section>
                 <h2>Conclusione</h2>
-                <p>Questa seconda fase ha portato il progetto da un nodo Proxmox pronto ma ancora privo di servizi pubblicati a un primo servizio realmente utilizzabile dall'esterno.</p>
+                <p>Questa fase ha definito una base riutilizzabile per pubblicare servizi web in modo ordinato, senza esporre direttamente la rete domestica.</p>
                 <p>Home Assistant e ora raggiungibile tramite:</p>
                 <pre><code>https://homeassistant.diegoserpelloni.com</code></pre>
                 <p>Il traffico passa da Cloudflare Tunnel, arriva al container proxy, viene gestito da Nginx Proxy Manager e viene inoltrato verso Home Assistant sulla rete interna.</p>
                 <p>I problemi principali incontrati sono stati legati alla configurazione del reverse proxy: l'errore 400 Bad Request e stato risolto configurando correttamente i trusted_proxies, mentre la risposta 405 Method Not Allowed si e rivelata un falso problema dovuto al tipo di richiesta usata nel test con curl.</p>
                 <p>L'accesso a Home Assistant e protetto con MFA tramite Microsoft Authenticator, mentre la gestione di Proxmox e dell'infrastruttura rimane separata tramite Tailscale.</p>
-                <p>A questo punto la base e pronta per crescere. I prossimi servizi potranno essere aggiunti seguendo lo stesso schema: container o VM dedicati, IP statico interno, sottodominio Cloudflare e regola su Nginx Proxy Manager.</p>
+                <p>La base è cresciuta mantenendo lo stesso schema: servizi in VM o container dedicati, indirizzi LAN stabili, reverse proxy centralizzato e accesso amministrativo separato tramite Tailscale.</p>
             </section>
 
             <nav class="blog-article-nav" aria-label="Navigazione articoli Proxmox">
